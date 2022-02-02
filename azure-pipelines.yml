@@ -31,6 +31,9 @@ jobs:
   
   - powershell: robot --loglevel DEBUG --pythonpath . -x outputxunit.xml keyword_driven.robot data_driven.robot gherkin.robot
     displayName: 'Run Robot Scripts'
+    ignoreLASTEXITCODE: true
+    showWarnings: true
+    
   - task: PublishTestResults@2
     inputs:
       testResultsFiles: outputxunit.xml
