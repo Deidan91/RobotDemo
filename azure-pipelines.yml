@@ -23,10 +23,13 @@ jobs:
       versionSpec: '$(python.version)'
       architecture: 'x64'
 
-  - script: pip install robotframework robotframework-seleniumlibrary && npm install chromedriver
+  - script: pip install robotframework
     displayName: 'Install dependencies'
+    
+  - script: pip install -r requirements.txt
+  displayName: 'Install requirements'
   
-  - powershell: robot --pythonpath . -x outputxunit.xml TestCases.robot
+  - powershell: robot --loglevel DEBUG --pythonpath . -x outputxunit.xml keyword_driven.robot data_driven.robot gherkin.robot
     displayName: 'Run Robot Scripts'
   - task: PublishTestResults@2
     inputs:
